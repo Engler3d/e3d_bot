@@ -1,0 +1,134 @@
+<?xml version="1.0" ?>
+<robot name="e3d_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find e3d_bot_description)/urdf/e3d_bot.trans" />
+<xacro:include filename="$(find e3d_bot_description)/urdf/e3d_bot.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="1.0065046946341601e-16 3.355015648780533e-17 0.025000000000000005" rpy="0 0 0"/>
+    <mass value="68.09657331058979"/>
+    <inertia ixx="0.954345" iyy="0.954345" izz="1.880317" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="turnTable_1">
+  <inertial>
+    <origin xyz="0.015394292608733942 -6.217248937900877e-17 0.07182246463634923" rpy="0 0 0"/>
+    <mass value="95.92340611318656"/>
+    <inertia ixx="0.876124" iyy="1.240281" izz="1.409951" ixy="-0.0" iyz="-0.0" ixz="-0.144355"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/turnTable_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/turnTable_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l1_1">
+  <inertial>
+    <origin xyz="-0.0736539542138444 1.5987211554602254e-16 0.6249999999999996" rpy="0 0 0"/>
+    <mass value="195.479313262593"/>
+    <inertia ixx="32.16085" iyy="32.168685" izz="0.565071" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 0.0 -0.225" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/l1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 0.0 -0.225" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/l1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="l2_1">
+  <inertial>
+    <origin xyz="0.0736539542138442 5.062616992290713e-16 0.6250000000000009" rpy="0 0 0"/>
+    <mass value="195.47931326259283"/>
+    <inertia ixx="32.16085" iyy="32.168685" izz="0.565071" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.0 -1.475" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/l2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.0 -1.475" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/l2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="endeffector_1">
+  <inertial>
+    <origin xyz="-0.05064014766169734 3.858456326888415e-08 0.07741885791303327" rpy="0 0 0"/>
+    <mass value="39.81497734362995"/>
+    <inertia ixx="0.40007" iyy="0.412181" izz="0.143564" ixy="0.0" iyz="0.0" ixz="-0.084966"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.0 -2.725" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/endeffector_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.0 -2.725" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find e3d_bot_description)/meshes/endeffector_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="turnTable_to_base" type="continuous">
+  <origin xyz="0.0 0.0 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="turnTable_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="l1_to_base" type="continuous">
+  <origin xyz="0.0 -0.0 0.175" rpy="0 0 0"/>
+  <parent link="turnTable_1"/>
+  <child link="l1_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="l2_to_l1" type="continuous">
+  <origin xyz="-0.0 0.0 1.25" rpy="0 0 0"/>
+  <parent link="l1_1"/>
+  <child link="l2_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="endeffector_to_l2" type="continuous">
+  <origin xyz="0.0 0.0 1.25" rpy="0 0 0"/>
+  <parent link="l2_1"/>
+  <child link="endeffector_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+</robot>

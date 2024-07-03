@@ -1,0 +1,7 @@
+# Default initial positions for e3d_bot's ros2_control fake system
+
+initial_positions:
+  endeffector_to_l2: 0
+  l1_to_base: 0
+  l2_to_l1: 0
+  turnTable_to_base: 0

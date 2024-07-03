@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="e3d_bot">
+
+    <!-- Useful XACRO Variables (Properties) -->
+    <xacro:property name="PI" value="3.14159265359" />
+    <xacro:property name="effort" value="30.0" />
+    <xacro:property name="velocity" value="10.0" />
+
+
+    <!-- Useful Macros -->
+    <xacro:macro name="default_inertial" params="mass ixx iyy izz ixy iyz ixz xyz rpy">
+        <inertial>
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <mass value="${mass}" />
+            <inertia ixx="${ixx}" ixy="${ixy}" ixz="${ixz}"
+                     iyy="${iyy}" iyz="${iyz}"
+                     izz="${izz}" />
+        </inertial>
+    </xacro:macro>
+    <xacro:macro name="default_transmission" params="number joint">
+        <transmission name="transmission_${number}">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="motor_${number}">
+                <mechanicalReduction>1.0</mechanicalReduction>
+            </actuator>
+            <joint name="${joint}">
+                <hardwareInterface>PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+    </xacro:macro>
+
+    <link name="world"/>
+    
+    <!-- Links -->
+    <link name="base_link">
+        <xacro:default_inertial mass="68.09657331058979" ixx="0.954345" iyy="0.954345" izz="1.880317" ixy="0.0" iyz="0.0" ixz="0.0" xyz="1.0065046946341601e-16 3.355015648780533e-17 0.025000000000000005" rpy="0 0 0"/>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="turnTable_1">
+        <xacro:default_inertial mass="95.92340611318656" ixx="0.876124" iyy="1.240281" izz="1.409951" ixy="-0.0" iyz="-0.0" ixz="-0.144355" xyz="0.015394292608733942 -6.217248937900877e-17 0.07182246463634923" rpy="0 0 0"/>
+        <visual>
+            <origin xyz="-0.0 -0.0 -0.05" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/turnTable_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="-0.0 -0.0 -0.05" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/turnTable_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="l1_1">
+        <xacro:default_inertial mass="195.479313262593" ixx="32.16085" iyy="32.168685" izz="0.565071" ixy="-0.0" iyz="-0.0" ixz="0.0" xyz="-0.0736539542138444 1.5987211554602254e-16 0.6249999999999996" rpy="0 0 0"/>
+        <visual>
+            <origin xyz="-0.0 0.0 -0.225" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/l1_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="-0.0 0.0 -0.225" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/l1_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="l2_1">
+        <xacro:default_inertial mass="195.47931326259283" ixx="32.16085" iyy="32.168685" izz="0.565071" ixy="-0.0" iyz="-0.0" ixz="0.0" xyz="0.0736539542138442 5.062616992290713e-16 0.6250000000000009" rpy="0 0 0"/>
+        <visual>
+            <origin xyz="0.0 -0.0 -1.475" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/l2_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 -0.0 -1.475" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/l2_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="endeffector_1">
+        <xacro:default_inertial mass="19.866958425522623" ixx="0.014941" iyy="0.014941" izz="0.000257" ixy="0.0" iyz="0.0" ixz="0.0" xyz="4.9737991503207015e-17 -1.8109558859999948e-17 -0.175" rpy="0 0 0"/>
+        <visual>
+            <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/endeffector_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://e3d_bot_description/meshes/endeffector_1.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- Joints -->
+    <joint name="virtual_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="turnTable_to_base" type="revolute">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="turnTable_1"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="${-PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}"/>
+    </joint>
+
+    <joint name="l1_to_base" type="revolute">
+        <origin xyz="0.0225 0 0.07" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="l1_1"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="${-PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}"/>
+    </joint>
+
+    <joint name="l2_to_l1" type="revolute">
+        <origin xyz="1.25 0 0" rpy="0 0 0"/>
+        <parent link="l1_1"/>
+        <child link="l2_1"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="${-PI/2}" upper="${PI/2}" effort="${effort}" velocity="${velocity}"/>
+    </joint>
+
+    <joint name="endeffector_to_l2" type="fixed">
+        <origin xyz="1.25 0 0" rpy="0 0 0"/>
+        <parent link="l2_1"/>
+        <child link="endeffector_1"/>
+        <axis xyz="-1.0 0.0 0.0"/>
+    </joint>
+
+    <!-- Transmissions -->
+    <xacro:default_transmission number="1" joint="turnTable_to_base"/>
+    <xacro:default_transmission number="2" joint="l1_to_base"/>
+    <xacro:default_transmission number="3" joint="l2_to_l1"/>
+    <xacro:default_transmission number="4" joint="endeffector_to_l2"/>
+
+</robot>

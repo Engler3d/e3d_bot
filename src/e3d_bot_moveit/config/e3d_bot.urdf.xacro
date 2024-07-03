@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="e3d_bot">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import e3d_bot urdf file -->
+    <xacro:include filename="$(find e3d_bot_description)/urdf/e3d_bot.urdf" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="e3d_bot.ros2_control.xacro" />
+
+
+    <xacro:e3d_bot_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

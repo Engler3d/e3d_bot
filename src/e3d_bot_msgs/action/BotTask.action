@@ -1,0 +1,9 @@
+# Goal
+float64[] arm_joint_goal
+float64[] gripper_joint_goal
+---
+# Result
+bool success
+---
+# Feedback
+int32 percentage
